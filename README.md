@@ -2,12 +2,10 @@
  
 This toolbox contains a fast algorithm for median filtering of signal and images with values 
     on the unit circle, for example phase or orientation data.
-It is a reference implementation for the algorithms described in the paper
+It is a C++ reference implementation of the algorithms described in the paper
 
-Martin Storath, Andreas Weinmann.
-
-"Fast median filtering for phase or orientation data"
-
+Martin Storath, Andreas Weinmann,
+"Fast median filtering for phase or orientation data",
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017
 
 Contents:
