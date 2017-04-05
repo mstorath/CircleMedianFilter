@@ -1,9 +1,13 @@
 # Circle median filter toolbox (CMF)
+ 
+This toolbox contains a fast algorithm for median filtering of signal and images with values 
+    on the unit circle, for example phase or orientation data.
+It is a reference implementation for the algorithms described in the paper
 
-This is a reference implementation for the algorithms described in the paper
+Martin Storath, Andreas Weinmann.
 
-Martin Storath, Andreas Weinmann 
 "Fast median filtering for phase or orientation data"
+
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017
 
 Contents:
@@ -13,4 +17,5 @@ Contents:
 (implemented in C++ with Matlab wrappers)
 
 Installation and usage:
-Run CMF_install.m in the Matlab console and follow the demos 
+
+- Run CMF_install.m in the Matlab console and follow the demos 
