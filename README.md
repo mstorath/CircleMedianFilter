@@ -1,6 +1,6 @@
 # Circle median filter toolbox (CMF)
  
-This toolbox contains a fast algorithm for median filtering of signal and images with values 
+This toolbox contains a fast algorithm for median filtering of signals and images with values 
     on the unit circle, for example phase or orientation data.
 It is a C++ reference implementation of the algorithms described in the paper
 
