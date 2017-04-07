@@ -5,8 +5,12 @@ This toolbox contains a fast algorithm for median filtering of signals and image
 It is a C++ reference implementation of the algorithms described in the paper
 
 Martin Storath, Andreas Weinmann,
-"Fast median filtering for phase or orientation data",
-IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017
+[Fast median filtering for phase or orientation data](https://hci.iwr.uni-heidelberg.de/sites/default/files/profiles/mstorath/files/storath2017fast.pdf), 
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press)
+
+Example:
+
+![alt tag](https://hci.iwr.uni-heidelberg.de/sites/default/files/publications/teaserimages/1908951751/mediancircularrevision_teaser_small.png)
 
 Contents:
 - demos:     some demos, self explanatory (implemented in Matlab)
@@ -17,3 +21,4 @@ Contents:
 Installation and usage:
 
 - Run CMF_install.m in the Matlab console and follow the demos 
+
