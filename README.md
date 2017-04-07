@@ -8,17 +8,17 @@ Martin Storath, Andreas Weinmann,
 [Fast median filtering for phase or orientation data](https://hci.iwr.uni-heidelberg.de/sites/default/files/profiles/mstorath/files/storath2017fast.pdf), 
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press)
 
-Example:
+### Example
 
 ![alt tag](https://hci.iwr.uni-heidelberg.de/sites/default/files/publications/teaserimages/1908951751/mediancircularrevision_teaser_small.png)
 
-Contents:
+### Contents
 - demos:     some demos, self explanatory (implemented in Matlab)
 - auxiliary: some useful helper functions (implemented in Matlab)
 - filters:   the fast algorithms for median filtering of circle valued data 
 (implemented in C++ with Matlab wrappers)
 
-Installation and usage:
+### Installation and usage
 
 - Run CMF_install.m in the Matlab console and follow the demos 
 
