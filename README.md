@@ -25,5 +25,6 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press)
 
 ### Installation and usage
 
-- Run CMF_install.m in the Matlab console and follow the demos 
+- From Matlab: Run CMF_install.m in the Matlab console and follow the demos 
+- From C++: Compile CMF_library.cpp. The relevant functions are medfiltCirc2D and medfiltCirc2DQuant. Their usage is described as comment in the CMF_library.cpp file.
 
