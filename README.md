@@ -10,7 +10,12 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press)
 
 ### Example
 
+
 ![alt tag](https://hci.iwr.uni-heidelberg.de/sites/default/files/publications/teaserimages/1908951751/mediancircularrevision_teaser_small.png)
+
+*Left:* A circle-valued image, i.e. every pixel takes its value on the unit circle (or in angular representation a value in (-pi, pi]). The values are visualized as hue component in the HSV color space.
+*Right:* Action of the circle-median filter using a filter mask of size 7 × 7. 
+
 
 ### Contents
 - demos:     some demos, self explanatory (implemented in Matlab)
