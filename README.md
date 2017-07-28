@@ -23,8 +23,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press, 
 
 ### Runtime comparison
 
-The time complexity is linear w.r.t. the size of the filter mask for non-quantized data
-and constant for quantized data
+The time complexity w.r.t. the size of the filter mask is
+- linear for non-quantized data
+- constant for quantized data
 
 <img src="docs/runtime.png" width="80%">
 
