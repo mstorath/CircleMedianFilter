@@ -7,12 +7,10 @@ The (arc distance) median filter for an image y with values on the unit circle i
 
 where d denotes the arc distance length of two angles, and r, t are the horizontal and vertical "radii" of the filter mask.
 
-The code is a reference implementation (in C++ with Matlab wrappers) of the algorithms described in the paper
+The code is a reference implementation (in C++ with Matlab wrappers) of the algorithms described in the paper:
 
 Martin Storath, Andreas Weinmann.
-
 [Fast median filtering for phase or orientation data.](https://doi.org/10.1109/TPAMI.2017.2692779)
-
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press, [preprint](https://hci.iwr.uni-heidelberg.de/sites/default/files/profiles/mstorath/files/storath2017fast.pdf))
 
 ### Example
