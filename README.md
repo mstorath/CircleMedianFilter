@@ -13,7 +13,7 @@ Martin Storath, Andreas Weinmann.
 [Fast median filtering for phase or orientation data.](https://doi.org/10.1109/TPAMI.2017.2692779)
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press, [preprint](https://hci.iwr.uni-heidelberg.de/sites/default/files/profiles/mstorath/files/storath2017fast.pdf))
 
-### Example
+### Example 
 
 
 ![alt tag](https://hci.iwr.uni-heidelberg.de/sites/default/files/publications/teaserimages/1908951751/mediancircularrevision_teaser_small.png)
@@ -21,13 +21,20 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017 (in press, 
 *Left:* A circle-valued image, i.e. every pixel takes its value on the unit circle (or in angular representation a value in (-pi, pi]). The values are visualized as hue component in the HSV color space.
 *Right:* Effect of the circle-median filter using a filter mask of size 7 × 7. 
 
+### Runtime comparison
+
+The time complexity is linear w.r.t. the size of the filter mask for non-quantized data
+and constant for quantized data
+
+<img src="docs/runtime.png" width="80%">
+
 ### Applications
 
 - Smoothing of phase data, e.g. interferometric SAR images
    ![alt tag](docs/InSAR.png)
 - Smoothing of orientation data, e.g. wind directions
 
-   <img src="docs/windDirections.png" width="50%">
+   <img src="docs/windDirections.png" width="60%">
    
 - Smoothing of vector fields in polar coordinates, e.g. optical flow images
 
