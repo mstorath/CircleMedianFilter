@@ -2,6 +2,21 @@
 #include <iostream>
 #include "time.h"
 #include <stdio.h>
+#include <limits>
+#include <cmath>
+#include <stdexcept>
+#ifndef M_PI
+namespace
+{
+    const double M_PI = std::acos(-1.0);
+}
+#endif
+
+#ifndef INFINITY
+
+const double INFINITY = std::numeric_limits<double>::infinity();
+
+#endif
 
 /*
  * Reference implementation of the arc distance median filters
