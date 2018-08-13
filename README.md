@@ -50,3 +50,8 @@ The time complexity w.r.t. the size of the filter mask is
 - From Matlab: Run CMF_install.m in the Matlab console and follow the demos 
 - From C++: Compile CMF_library.cpp. The relevant functions are medfiltCirc2D and medfiltCirc2DQuant. Their usage is described as comment in the CMF_library.cpp file.
 
+## References
+### How to cite
+- M. Storath, A. Weinmann. [Fast median filtering for phase or orientation data.](https://doi.org/10.1109/TPAMI.2017.2692779) IEEE Transactions on Pattern Analysis and Machine Intelligence, 40(3):639-652, 2018
+### User applications
+- S. Quan et al. Derivation of the Orientation Parameters in Built-Up Areas: With Application to Model-Based Decomposition. IEEE Transactions on Geoscience and Remote Sensing, 2018
