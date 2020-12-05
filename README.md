@@ -55,6 +55,7 @@ The time complexity w.r.t. the size of the filter mask is
 ## References
 ### How to cite
 - M. Storath, A. Weinmann. [Fast median filtering for phase or orientation data.](https://doi.org/10.1109/TPAMI.2017.2692779) IEEE Transactions on Pattern Analysis and Machine Intelligence, 40(3):639-652, 2018
-### User applications
+### Selected user applications
 - S. Quan et al. Derivation of the Orientation Parameters in Built-Up Areas: With Application to Model-Based Decomposition. IEEE Transactions on Geoscience and Remote Sensing, 2018
 - H. Salmane et al. A method for the automated detection of solar radio bursts in dynamic spectra. J. Space Weather Space Clim. 2018
+- B. Guo, J. Wen, Y. Han. Deep Material Recognition in Light-Fields via Disentanglement of Spatial and Angular Information. ECCV 2020
