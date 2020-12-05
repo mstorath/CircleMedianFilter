@@ -58,4 +58,5 @@ The time complexity w.r.t. the size of the filter mask is
 ### Selected user applications
 - S. Quan et al. Derivation of the Orientation Parameters in Built-Up Areas: With Application to Model-Based Decomposition. IEEE Transactions on Geoscience and Remote Sensing, 2018
 - H. Salmane et al. A method for the automated detection of solar radio bursts in dynamic spectra. J. Space Weather Space Clim. 2018
+- S. Quan et al., Derivation of the Orientation Parameters in Built-Up Areas: With Application to Model-Based Decomposition. IEEE Transactions on Geoscience and Remote Sensing. 2018
 - B. Guo, J. Wen, Y. Han. Deep Material Recognition in Light-Fields via Disentanglement of Spatial and Angular Information. ECCV 2020
