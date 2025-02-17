@@ -10,7 +10,7 @@ jobs:
   build_wheels:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest]
         python-version: ["3.11"]
     runs-on: ${{ matrix.os }}
     steps:
@@ -43,7 +43,8 @@ jobs:
       - name: Build Wheels
         env:
           CXXFLAGS: "-std=c++11"
-          CIBW_SKIP: "pypy*"  # Skip building wheels for any PyPy interpreter
+          CIBW_SKIP: "pypy*"
+          CIBW_BUILD: "cp*"
         run: cibuildwheel --output-dir wheelhouse .
 
       - name: Upload Wheels Artifact
