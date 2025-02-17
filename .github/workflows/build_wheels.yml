@@ -50,5 +50,24 @@ jobs:
       - name: Upload Wheels Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: wheels-${{ github.run_id }}
           path: wheelhouse/*.whl
+
+  publish_wheels:
+      needs: build_wheels
+      runs-on: ubuntu-latest
+      if: github.event_name == 'push'  # Only publish on push events (not PRs)
+      steps:
+        - uses: actions/checkout@v3
+        - name: Download Wheels Artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: wheels
+            path: wheelhouse
+        - name: Install Twine
+          run: pip install twine
+        - name: Publish to PyPI
+          env:
+            TWINE_USERNAME: "__token__"
+            TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          run: twine upload wheelhouse/*.whl
