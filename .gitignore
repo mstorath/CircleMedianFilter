@@ -2,3 +2,13 @@
 .DS_Store
 .vscode/c_cpp_properties.json
 /build
+CMakeLists.txt
+dist/pycmf-0.1.0-cp312-cp312-macosx_11_0_arm64.whl
+dist/pycmf-0.1.0.tar.gz
+pycmf.egg-info/dependency_links.txt
+pycmf.egg-info/PKG-INFO
+pycmf.egg-info/requires.txt
+pycmf.egg-info/SOURCES.txt
+pycmf.egg-info/top_level.txt
+requirements.txt
+tests/CMF_Python_test.py
