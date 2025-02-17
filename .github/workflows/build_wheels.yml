@@ -43,6 +43,7 @@ jobs:
       - name: Build Wheels
         env:
           CXXFLAGS: "-std=c++11"
+          CIBW_SKIP: "pypy*"  # Skip building wheels for any PyPy interpreter
         run: cibuildwheel --output-dir wheelhouse .
 
       - name: Upload Wheels Artifact
