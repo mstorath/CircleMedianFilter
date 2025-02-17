@@ -50,7 +50,7 @@ jobs:
       - name: Upload Wheels Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ github.run_id }}
+          name: wheels-${{ github.run_number }}
           path: wheelhouse/*.whl
 
   publish_wheels:
