@@ -1,7 +1,7 @@
 function CMF_demoQuantized
 
 % load data (data source: http://www.ndbc.noaa.gov/historical_data.shtml )
-load CMF_windDir.mat
+load ../data/CMF_windDir.mat
 
 % convert from deg to rad in (-pi, pi]
 myDegToRad = @(x)(x / 360 - 0.5) * 2 * pi;

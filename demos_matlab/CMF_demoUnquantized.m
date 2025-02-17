@@ -1,7 +1,7 @@
 function CMF_demoUnquantized
 
 % load InSAR image, image source: https://earth.esa.int/workshops/ers97/papers/thiel/index-2.html
-img = double(imread('CMF_imgInSAR.png'));
+img = double(imread('../data/CMF_imgInSAR.png'));
 % scale from [0, 255] to [-pi, pi]
 img2pi = (img/255 - 0.5) * 2 * pi; 
 
