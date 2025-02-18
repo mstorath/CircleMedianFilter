@@ -62,7 +62,7 @@ jobs:
         - name: Download Wheels Artifact
           uses: actions/download-artifact@v4
           with:
-            name: wheels
+            name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
             path: wheelhouse
         - name: Install Twine
           run: pip install twine
