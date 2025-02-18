@@ -1,4 +1,4 @@
-name: Build Wheels
+name: Build and Publish Wheels
 
 on:
   push:
@@ -26,12 +26,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
-
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
           choco install cmake
-
       - name: Install cibuildwheel
         run: pip install cibuildwheel
 
@@ -45,19 +43,20 @@ jobs:
       - name: Upload Wheels Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
+          name: wheels
           path: wheelhouse/*.whl
+          merge-multiple: true
 
   publish_wheels:
     needs: build_wheels
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'  # Only publish on push events (not PRs)
+    if: github.event_name == 'push'  # Only publish on push events, not PRs
     steps:
       - uses: actions/checkout@v3
       - name: Download Wheels Artifact
         uses: actions/download-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
+          name: wheels
           path: wheelhouse
       - name: Install Twine
         run: pip install twine
