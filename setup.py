@@ -29,5 +29,5 @@ setup(
     ],
     python_requires=">=3.9",
     license="MIT", 
-    license_file="LICENSE",  
+    license_files=["LICENSE"]
 )
