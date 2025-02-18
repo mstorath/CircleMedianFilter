@@ -7,7 +7,7 @@ ext_modules = [
         ["filters/CMF_python_bindings.cpp", "filters/CMF_library.cpp"],
         include_dirs=[pybind11.get_include()],
         language="c++",
-        extra_compile_args=["-std=c++11"],  # specify C++11 standard (or higher)
+        extra_compile_args=["-std=c++11"],
     ),
 ]
 
@@ -19,7 +19,7 @@ setup(
     description="A Circle Median Filter package for Python",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/mstorath/CircleMedianFilter", 
+    url="https://github.com/mstorath/CircleMedianFilter",
     packages=find_packages(),
     ext_modules=ext_modules,
     install_requires=["numpy", "pybind11"],
@@ -28,4 +28,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
+    license="MIT",  # or your chosen license identifier
+    license_files=["LICENSE"],  # include your license file here
 )
