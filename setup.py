@@ -28,5 +28,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
-    license_files = ("LICENSE.txt",),
+    license_files = ("LICENSE",),
 )

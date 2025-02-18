@@ -72,4 +72,4 @@ jobs:
         env:
           TWINE_USERNAME: "__token__"
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload $(find wheelhouse -type f -name '*.whl')
+        run: twine upload wheelhouse/*.whl
