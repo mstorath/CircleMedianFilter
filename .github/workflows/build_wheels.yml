@@ -49,20 +49,20 @@ jobs:
           path: wheelhouse/*.whl
 
   publish_wheels:
-      needs: build_wheels
-      runs-on: ubuntu-latest
-      if: github.event_name == 'push'  # Only publish on push events (not PRs)
-      steps:
-        - uses: actions/checkout@v3
-        - name: Download Wheels Artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
-            path: wheelhouse
-        - name: Install Twine
-          run: pip install twine
-        - name: Publish to PyPI
-          env:
-            TWINE_USERNAME: "__token__"
-            TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-          run: twine upload wheelhouse/*.whl
+    needs: build_wheels
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'  # Only publish on push events (not PRs)
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Wheels Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
+          path: wheelhouse
+      - name: Install Twine
+        run: pip install twine
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: "__token__"
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload wheelhouse/*.whl
