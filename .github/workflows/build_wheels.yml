@@ -56,7 +56,7 @@ jobs:
         env:
           TWINE_USERNAME: "__token__"
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload dist/*
+        run: twine upload wheelhouse/*
 
       - name: Verify uploaded package
         run: pip install --no-cache-dir --index-url https://pypi.org/simple/ your-package-name
