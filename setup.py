@@ -28,6 +28,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
-    license="MIT",  # or your chosen license identifier
-    license_files=["LICENSE"],  # include your license file here
+    license="MIT", 
+    license_file="LICENSE",  
 )
