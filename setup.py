@@ -13,7 +13,7 @@ ext_modules = [
 
 setup(
     name="pycirclemedianfilter",
-    version="0.1.0",
+    version="0.1.1",
     author="Martin Storath",
     author_email="martin.storath@thws.de",
     description="A Circle Median Filter package for Python",
@@ -28,6 +28,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
-    license="MIT", 
-    license_files=["LICENSE"]
+    license_files = ("LICENSE.txt",),
 )
