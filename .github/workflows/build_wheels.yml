@@ -51,21 +51,25 @@ jobs:
   publish_wheels:
     needs: build_wheels
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'  # Only publish on push events (not PRs)
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v3
-      
-      # Download all artifacts from this workflow run
+  
+      # Download all artifacts (wheels) from the build job
       - name: Download Wheels Artifacts
         uses: actions/download-artifact@v4
         with:
           path: wheelhouse
-
+  
+      # List files to verify they were downloaded correctly
+      - name: List files in wheelhouse
+        run: ls -la wheelhouse
+  
       - name: Install Twine
         run: pip install twine
-
+  
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: "__token__"
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload wheelhouse/*.whl
+        run: twine upload $(find wheelhouse -type f -name '*.whl')
