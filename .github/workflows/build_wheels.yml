@@ -1,33 +1,39 @@
-name: Publish Python Package
+name: Build and Publish Wheels
 
 on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ] # Runs only when a new tag starting with "v" is pushed
+    branches: [ master ]
 
 jobs:
-  build-and-publish:
-    name: Build and Publish Package
+  build_wheels:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
     runs-on: ${{ matrix.os }}
-
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
         run: |
-          python -m pip install --upgrade pip
-          pip install build twine
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+          
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          choco install cmake
+
+      - name: Install cibuildwheel
+        run: pip install cibuildwheel
 
       - name: Build Wheels
         env:
@@ -35,16 +41,20 @@ jobs:
           CIBW_SKIP: "pypy*"
           CIBW_BUILD: "cp*"
         run: cibuildwheel --output-dir wheelhouse .
-  
+
       - name: Upload Wheels Artifact
         uses: actions/upload-artifact@v4
         with:
           name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
           path: wheelhouse/*.whl
-
-      - name: Publish package to PyPI
+  
+  
+      - name: Install Twine
+        run: pip install twine
+  
+      - name: Publish to PyPI
         env:
-          TWINE_USERNAME: __token__
+          TWINE_USERNAME: "__token__"
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: twine upload dist/*
 
