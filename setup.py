@@ -13,7 +13,7 @@ ext_modules = [
 
 setup(
     name="pycirclemedianfilter",
-    version="0.1.5",
+    version="0.1.6",
     author="Martin Storath",
     author_email="martin.storath@thws.de",
     description="A Circle Median Filter package for Python",
