@@ -81,7 +81,7 @@ py::array_t<double> medfiltCirc2DQuant_wrapper(py::array_t<double> y, int R, int
     return u;
 }
 
-PYBIND11_MODULE(pycmf, m) {
+PYBIND11_MODULE(pycirclemedianfilter, m) {
     m.doc() = "Circle Median Filter module using C++ and pybind11";
     m.def("medfilt_circ2d", &medfiltCirc2D_wrapper,
           "Apply circle median filter on a 2D image (non-quantized data)",

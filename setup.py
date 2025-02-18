@@ -3,7 +3,7 @@ import pybind11
 
 ext_modules = [
     Extension(
-        "pycmf.pycmf", 
+        "pycirclemedianfilter", 
         ["filters/CMF_python_bindings.cpp", "filters/CMF_library.cpp"],
         include_dirs=[pybind11.get_include()],
         language="c++",
@@ -12,7 +12,7 @@ ext_modules = [
 ]
 
 setup(
-    name="pycmf",
+    name="pycirclemedianfilter",
     version="0.1.0",
     author="Martin Storath",
     author_email="martin.storath@thws.de",
@@ -27,5 +27,5 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.9",
 )

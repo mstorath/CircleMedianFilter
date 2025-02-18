@@ -12,3 +12,11 @@ pycmf.egg-info/SOURCES.txt
 pycmf.egg-info/top_level.txt
 requirements.txt
 tests/CMF_Python_test.py
+pycirclemedianfilter.egg-info/top_level.txt
+pycirclemedianfilter.egg-info/SOURCES.txt
+pycirclemedianfilter.egg-info/requires.txt
+pycirclemedianfilter.egg-info/PKG-INFO
+pycirclemedianfilter.egg-info/dependency_links.txt
+dist/pycirclemedianfilter-0.1.0-cp312-cp312-macosx_11_0_arm64.whl
+dist/pycirclemedianfilter-0.1.0.tar.gz
+pycirclemedianfilter.cpython-312-darwin.so

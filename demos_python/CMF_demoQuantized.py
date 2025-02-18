@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-import pycmf  # Your binding module that exposes medfilt_circ2d_quant
+import pycirclemedianfilter as cmf 
+import os
 
 def deg_to_rad(x):
     """
@@ -11,9 +12,10 @@ def deg_to_rad(x):
     return (x / 360 - 0.5) * 2 * np.pi
 
 def main():
-    # Load wind direction data from the text file.
-    # Adjust the path as needed.
-    filename = '../data/CMF_windDir.txt'
+
+    # get path of this file
+    path = os.path.abspath(os.path.dirname(__file__))
+    filename = os.path.join(path, '../data/CMF_windDir.txt')
     try:
         windDir = np.loadtxt(filename)
     except Exception as e:
@@ -31,7 +33,6 @@ def main():
     
     # Set filter size:
     # Data is recorded every 10 minutes; one day has 24*6 = 144 samples.
-    # MATLAB uses R = 24*6 + 1.
     T = 24 * 6 + 1
     R = 1  # Since the data is 1D
     
@@ -43,7 +44,7 @@ def main():
 
     # Perform filtering using your quantized median filter.
     start_time = time.time()
-    circleMedian = pycmf.medfilt_circ2d_quant(windDir2Pi_reshaped, R, T, quant)
+    circleMedian = cmf.medfilt_circ2d_quant(windDir2Pi_reshaped, R, T, quant)
     elapsed_time = time.time() - start_time
     print("Filtering took {:.3f} seconds".format(elapsed_time))
     

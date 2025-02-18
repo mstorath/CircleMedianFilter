@@ -1,9 +1,10 @@
 import numpy as np
-import pycmf
+import pycirclemedianfilter as cmf
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import time
 from PIL import Image
+import os
 
 def phase_to_rgb(x):
     """
@@ -23,8 +24,10 @@ def phase_to_rgb(x):
 
 def main():
     # Load the InSAR image. Replace 'CMF_imgInSAR.png' with the correct path if needed.
-    # MATLAB uses imread; here, plt.imread returns a float array in [0,1] or uint8.
-    img = Image.open('../data/CMF_imgInSAR.png')
+    path = os.path.abspath(os.path.dirname(__file__))
+    filename = os.path.join(path, '../data/CMF_imgInSAR.png')
+
+    img = Image.open(filename)
     
     
     img = np.array(img, dtype=np.float64)
@@ -45,8 +48,7 @@ def main():
 
     # Apply the circle-median filter and measure execution time.
     start_time = time.time()
-    #circle_median = pycmf.medfilt_circ2d(circle_median, img2pi, R, R)
-    circle_median = pycmf.medfilt_circ2d(img2pi, R, R)
+    circle_median = cmf.medfilt_circ2d(img2pi, R, R)
     elapsed_time = time.time() - start_time
     print("Filtering time: {:.3f} seconds".format(elapsed_time))
     
