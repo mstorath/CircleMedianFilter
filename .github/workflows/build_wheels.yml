@@ -1,75 +1,37 @@
-name: Build and Publish Wheels
+name: Publish Python Package
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - 'v*'  # Runs only when a new tag starting with "v" is pushed
 
 jobs:
-  build_wheels:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
-    runs-on: ${{ matrix.os }}
+  build-and-publish:
+    name: Build and Publish Package
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.9'  # Change to your required version
 
-      - name: Install dependencies (Linux)
-        if: runner.os == 'Linux'
+      - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake
-          
-      - name: Install dependencies (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          choco install cmake
+          python -m pip install --upgrade pip
+          pip install build twine
 
-      - name: Install cibuildwheel
-        run: pip install cibuildwheel
+      - name: Build package
+        run: python -m build
 
-      - name: Build Wheels
+      - name: Publish package to PyPI
         env:
-          CXXFLAGS: "-std=c++11"
-          CIBW_SKIP: "pypy*"
-          CIBW_BUILD: "cp*"
-        run: cibuildwheel --output-dir wheelhouse .
-
-      - name: Upload Wheels Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-${{ matrix.os }}-${{ matrix.python-version }}-${{ github.run_number }}
-          path: wheelhouse/*.whl
-
-  publish_wheels:
-    needs: build_wheels
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v3
-  
-      # Download all artifacts (wheels) from the build job
-      - name: Download Wheels Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: wheelhouse
-  
-      # List files to verify they were downloaded correctly
-      - name: List files in wheelhouse
-        run: ls -la wheelhouse
-  
-      - name: Install Twine
-        run: pip install twine
-  
-      - name: Publish to PyPI
-        env:
-          TWINE_USERNAME: "__token__"
+          TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload wheelhouse/*.whl
+        run: twine upload dist/*
+
+      - name: Verify uploaded package
+        run: pip install --no-cache-dir --index-url https://pypi.org/simple/ your-package-name
