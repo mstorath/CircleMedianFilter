@@ -60,7 +60,7 @@ def main():
     axs[0].axis('off')
     
     axs[1].imshow(phase_to_rgb(circle_median))
-    axs[1].set_title('Arc distance median filter (3x3)')
+    axs[1].set_title('Arc distance median filter (7x7)')
     axs[1].axis('off')
 
     axs[2].imshow(img2pi - circle_median)
