@@ -20,7 +20,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     int RD = (int)mxGetScalar(rIn);
     int TD = (int)mxGetScalar(tIn);
     int nIter = (int)mxGetScalar(nIterIn);
-    double stopTol = (int)mxGetScalar(stopTolIn);
+    double stopTol = mxGetScalar(stopTolIn);
     int nDimNum = mxGetNumberOfDimensions(yIn);
     const int* pDims = mxGetDimensions(yIn);
     double* y = mxGetPr(yIn);
