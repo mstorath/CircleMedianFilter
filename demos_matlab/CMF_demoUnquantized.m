@@ -22,6 +22,6 @@ title('InSAR Data')
 
 subplot(1,2,2)
 imshow(phaseToRGB(circleMedian))
-title('Arc distance median filter (3x3)')
+title('Arc distance median filter (7x7)')
 
 end
