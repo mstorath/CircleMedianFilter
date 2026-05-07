@@ -43,6 +43,9 @@ jobs:
         run: pip install cibuildwheel
 
       - name: Build Wheels
+        # Force bash on Windows too — PowerShell is the default there and
+        # would reject the parameter expansion below.
+        shell: bash
         env:
           CXXFLAGS: "-std=c++11"
           # i686 dropped: no meaningful Linux desktop install base in 2026.
