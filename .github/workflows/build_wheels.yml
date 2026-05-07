@@ -9,15 +9,19 @@ on:
 jobs:
   build_wheels:
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13, macos-14, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        # macos-13 (Intel) dropped — works for CMF (~140s/job, no hang) but
+        # adds wasted CI minutes; family-wide decision is Apple Silicon only.
+        # cp313 added; cp38 EOL.
+        os: [ubuntu-latest, macos-14, windows-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -25,12 +29,10 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake
-          
-      - name: Install dependencies (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          choco install cmake
+          # build-essential for the C++ toolchain (gcc/g++). cmake removed —
+          # this isn't a CMake-driven build (setuptools+pybind11), so it was
+          # being installed for nothing.
+          sudo apt-get install -y build-essential
 
       - name: Install cibuildwheel
         run: pip install cibuildwheel
