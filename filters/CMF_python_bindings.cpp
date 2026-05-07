@@ -15,22 +15,21 @@ namespace py = pybind11;
  * Returns:
  *   A new 2D NumPy array with the filtered result.
  */
-py::array_t<double> medfiltCirc2D_wrapper(py::array_t<double> y, int R, int T) {
+// `f_style | forcecast` makes pybind11 auto-convert any 2-D float64 array
+// (including the default C-order arrays NumPy returns from np.zeros / arange /
+// ones / array etc.) into a Fortran-contiguous copy on entry. Prior to v0.1.7
+// the binding required np.asfortranarray() up front and threw a confusing
+// RuntimeError otherwise; users had to follow the demo idiom verbatim.
+using FArray = py::array_t<double, py::array::f_style | py::array::forcecast>;
+
+py::array_t<double> medfiltCirc2D_wrapper(FArray y, int R, int T) {
     py::buffer_info buf_y = y.request();
     if (buf_y.ndim != 2)
         throw std::runtime_error("Input image y must be 2D");
-    
+
     int M = static_cast<int>(buf_y.shape[0]);
     int N = static_cast<int>(buf_y.shape[1]);
 
-    // Expected strides for a Fortran-contiguous array:
-    size_t expected_stride0 = sizeof(double);
-    size_t expected_stride1 = M * sizeof(double);
-    if (buf_y.strides[0] != expected_stride0 || buf_y.strides[1] != expected_stride1) {
-        throw std::runtime_error("Input array y must be Fortran contiguous (column-major). "
-                                 "Please convert the array using np.asfortranarray() on the Python side.");
-    }
-    
     // Create output array with Fortran strides
     std::vector<size_t> shape = {static_cast<size_t>(M), static_cast<size_t>(N)};
     std::vector<size_t> fortran_strides = {sizeof(double), M * sizeof(double)};
@@ -51,7 +50,7 @@ py::array_t<double> medfiltCirc2D_wrapper(py::array_t<double> y, int R, int T) {
 // y: 2D NumPy array (input image)
 // R, T: filter parameters (must be odd integers)
 // v: 1D NumPy array of quantization values.
-py::array_t<double> medfiltCirc2DQuant_wrapper(py::array_t<double> y, int R, int T, py::array_t<double> v) {
+py::array_t<double> medfiltCirc2DQuant_wrapper(FArray y, int R, int T, FArray v) {
     py::buffer_info buf_y = y.request();
     if (buf_y.ndim != 2)
         throw std::runtime_error("Input image y must be 2D");

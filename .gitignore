@@ -1,24 +1,37 @@
-
+# OS / editor
 .DS_Store
 .vscode/c_cpp_properties.json
-/build
+
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+wheelhouse/
+*.so
+
+# pytest / hypothesis caches
+.pytest_cache/
+.hypothesis/
+
+# Local virtualenvs
+.venv/
+venv/
+
+# CMake (if anyone scripts a CMake-driven build later)
 CMakeLists.txt
-dist/pycmf-0.1.0-cp312-cp312-macosx_11_0_arm64.whl
-dist/pycmf-0.1.0.tar.gz
-pycmf.egg-info/dependency_links.txt
-pycmf.egg-info/PKG-INFO
-pycmf.egg-info/requires.txt
-pycmf.egg-info/SOURCES.txt
-pycmf.egg-info/top_level.txt
-requirements.txt
-tests/CMF_Python_test.py
-pycirclemedianfilter.egg-info/top_level.txt
-pycirclemedianfilter.egg-info/SOURCES.txt
-pycirclemedianfilter.egg-info/requires.txt
-pycirclemedianfilter.egg-info/PKG-INFO
-pycirclemedianfilter.egg-info/dependency_links.txt
-dist/pycirclemedianfilter-0.1.0-cp312-cp312-macosx_11_0_arm64.whl
-dist/pycirclemedianfilter-0.1.0.tar.gz
-pycirclemedianfilter.cpython-312-darwin.so
-dist/pycirclemedianfilter-0.1.1-cp312-cp312-macosx_11_0_arm64.whl
-dist/pycirclemedianfilter-0.1.1.tar.gz
+
+# MATLAB Mex build outputs.
+# .mexmaca64 (Apple Silicon) and .mexmaci64 (Intel Mac) for the four
+# committed .cpp filters live under filters/ and were checked in pre-v0.1.7.
+# From v0.1.7 onward, freshly-built .mex* binaries should not be committed —
+# MATLAB users regenerate them by running CMF_install.m. Existing committed
+# binaries stay until a future release decides to remove them.
+*.mex*
+!filters/CMF_medfiltCirc2DMex.mexmaca64
+!filters/CMF_medfiltCirc2DMex.mexmaci64
+!filters/CMF_medfiltCirc2DQuantMex.mexmaca64
+!filters/CMF_medfiltCirc2DQuantMex.mexmaci64
+!filters/CMF_medfiltGeoRN2DMex.mexmaci64
