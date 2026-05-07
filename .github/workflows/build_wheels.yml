@@ -45,23 +45,28 @@ jobs:
       - name: Build Wheels
         env:
           CXXFLAGS: "-std=c++11"
-          # i686 dropped: no meaningful Linux desktop install base in 2026,
-          # and it doubled wheelhouse contents (the non-precise glob in the
-          # test step below used to pick an i686 wheel on the x86_64 runner).
+          # i686 dropped: no meaningful Linux desktop install base in 2026.
           CIBW_SKIP: "pypy* *i686*"
-          CIBW_BUILD: "cp*"
-        run: cibuildwheel --output-dir wheelhouse .
+        run: |
+          # Pin cibuildwheel to the matrix Python only (default cp* would
+          # build all 5 Pythons on every runner — same filenames overwrite
+          # each other in download-artifact's merge-multiple, and a flaky
+          # upload from any one of the 5 redundant copies leaves a corrupt
+          # wheel in the merged dist for the publish job's twine check).
+          PYV="${{ matrix.python-version }}"
+          export CIBW_BUILD="cp${PYV//.}-*"
+          cibuildwheel --output-dir wheelhouse .
 
       - name: Run pytest against the built wheel
-        # Linux only: cibuildwheel builds wheels for every cp* Python in the
-        # build set (not just the host's), so we have to glob precisely on
-        # both the matrix Python tag and x86_64. macOS and Windows wheels
-        # are tested implicitly via the post-publish verify step.
+        # Linux only: install the freshly-built wheel via --find-links so
+        # pip picks the best-matching manylinux variant automatically (the
+        # runner produces both manylinux_2_17 and manylinux_2_28 wheels for
+        # the host Python). macOS and Windows wheels are exercised by the
+        # post-publish verify step.
         if: runner.os == 'Linux'
         run: |
           pip install pytest matplotlib Pillow
-          PYTAG=cp$(python -c 'import sys; print(f"{sys.version_info.major}{sys.version_info.minor}")')
-          pip install --no-deps --force-reinstall wheelhouse/pycirclemedianfilter-*-${PYTAG}-${PYTAG}-manylinux*_x86_64*.whl
+          pip install --no-index --find-links wheelhouse/ --no-deps --force-reinstall pycirclemedianfilter
           pytest tests_py/ -v
 
       - name: Upload Wheels Artifact
