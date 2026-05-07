@@ -45,19 +45,23 @@ jobs:
       - name: Build Wheels
         env:
           CXXFLAGS: "-std=c++11"
-          CIBW_SKIP: "pypy*"
+          # i686 dropped: no meaningful Linux desktop install base in 2026,
+          # and it doubled wheelhouse contents (the non-precise glob in the
+          # test step below used to pick an i686 wheel on the x86_64 runner).
+          CIBW_SKIP: "pypy* *i686*"
           CIBW_BUILD: "cp*"
         run: cibuildwheel --output-dir wheelhouse .
 
       - name: Run pytest against the built wheel
-        # Linux only: cibuildwheel produces a manylinux wheel matching the
-        # ambient Python; we install it and exercise tests_py/. macOS and
-        # Windows wheels are tested implicitly via the post-publish verify
-        # step. Skipping non-Linux here keeps each runner under ~3 minutes.
+        # Linux only: cibuildwheel builds wheels for every cp* Python in the
+        # build set (not just the host's), so we have to glob precisely on
+        # both the matrix Python tag and x86_64. macOS and Windows wheels
+        # are tested implicitly via the post-publish verify step.
         if: runner.os == 'Linux'
         run: |
           pip install pytest matplotlib Pillow
-          pip install --no-deps --force-reinstall wheelhouse/*manylinux*.whl
+          PYTAG=cp$(python -c 'import sys; print(f"{sys.version_info.major}{sys.version_info.minor}")')
+          pip install --no-deps --force-reinstall wheelhouse/pycirclemedianfilter-*-${PYTAG}-${PYTAG}-manylinux*_x86_64*.whl
           pytest tests_py/ -v
 
       - name: Upload Wheels Artifact
