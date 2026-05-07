@@ -1,3 +1,61 @@
 [build-system]
-requires = ["setuptools", "wheel", "cibuildwheel", "pybind11"]
+requires = ["setuptools>=64", "wheel", "pybind11>=2.10"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "pycirclemedianfilter"
+# Note: the `py` prefix is permanent — the package was first published as
+# `pycirclemedianfilter` v0.1.6 on 2025-02-18 and renaming would require a
+# deprecation cycle. Sibling repos in the variational-methods family use
+# flat names (`pottslab`, `mumfordshah2d`, …); this is the family outlier.
+version = "0.1.7"
+description = "Fast median filtering for circle-valued (phase / orientation) data — Python bindings for the C++ reference implementation"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+keywords = [
+    "circle-median-filter",
+    "phase-data",
+    "orientation",
+    "median-filter",
+    "image-processing",
+    "signal-processing",
+    "variational-methods",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = ["numpy>=1.20"]
+authors = [
+    {name = "Martin Storath", email = "martin.storath@thws.de"},
+    {name = "Andreas Weinmann", email = "andreas.weinmann@thws.de"},
+]
+
+[project.optional-dependencies]
+demos = ["matplotlib>=3.6", "Pillow>=9"]
+test = ["pytest>=7", "matplotlib>=3.6", "Pillow>=9"]
+
+[project.urls]
+Homepage = "https://github.com/mstorath/CircleMedianFilter"
+Repository = "https://github.com/mstorath/CircleMedianFilter"
+"Bug Tracker" = "https://github.com/mstorath/CircleMedianFilter/issues"
+
+[tool.setuptools]
+# This package ships only a C++ extension (declared in setup.py); there are
+# no top-level Python packages. Without this, setuptools' flat-layout
+# auto-discovery sees `filters/`, `auxiliary/`, `demos_python/`, etc. as
+# candidate packages and refuses to build.
+packages = []
+py-modules = []
