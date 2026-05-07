@@ -58,5 +58,7 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: twine upload --skip-existing wheelhouse/*.whl
 
-      - name: Verify uploaded package
-        run: pip install --no-cache-dir --index-url https://pypi.org/simple/ your-package-name
+      - name: Verify uploaded package (real import + filter call)
+        run: |
+          pip install --no-cache-dir --index-url https://pypi.org/simple/ pycirclemedianfilter
+          python -c "import numpy as np, pycirclemedianfilter as cmf; out = cmf.medfilt_circ2d(np.zeros((4, 4)), 1, 1); assert out.shape == (4, 4), f'unexpected shape {out.shape}'; print('verify OK')"
