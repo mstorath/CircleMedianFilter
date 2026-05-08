@@ -109,8 +109,12 @@ jobs:
       name: pypi
       url: https://pypi.org/project/pycirclemedianfilter/
     permissions:
-      id-token: write   # required for OIDC trusted publishing
+      id-token: write    # required for OIDC trusted publishing
+      contents: write    # required for the GitHub Release step below
     steps:
+      - name: Checkout (for CHANGELOG.md)
+        uses: actions/checkout@v4
+
       - name: Download all wheels and sdist
         uses: actions/download-artifact@v4
         with:
@@ -123,6 +127,30 @@ jobs:
         # PYPI_API_TOKEN secret is retained in repo settings as a manual
         # fallback (user can `twine upload` from local if OIDC ever breaks).
         uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Extract release notes from CHANGELOG.md
+        # Pulls the section bounded by `## <version>` and the next `## `.
+        # GITHUB_REF_NAME is "v0.1.7"; CHANGELOG headings are "## 0.1.7 — ...".
+        run: |
+          VER="${GITHUB_REF_NAME#v}"
+          awk -v ver="$VER" '
+            $0 ~ "^## " ver "( |$)" { found=1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+          echo "--- extracted notes ---"
+          cat release-notes.md
+
+      - name: Create GitHub Release
+        # Idempotent: if a Release for this tag already exists (e.g. created
+        # manually before this step landed), softprops updates rather than
+        # erroring. Wheels + sdist from dist/ are attached as assets so the
+        # release page mirrors PyPI for users who don't use pip.
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          body_path: release-notes.md
+          files: dist/*
 
       - name: Verify uploaded package (real import + filter call)
         run: |
