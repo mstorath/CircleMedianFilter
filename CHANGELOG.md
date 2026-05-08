@@ -7,6 +7,14 @@ documented here. This project follows
 
 ## [Unreleased]
 
+### Changed
+
+- **CI now auto-creates a GitHub Release on every `v*` tag push** in
+  addition to publishing to PyPI. The publish job extracts the matching
+  `## <version>` section from `CHANGELOG.md` as the release body and
+  attaches all wheels and the sdist as assets. v0.1.7's release entry
+  was created retroactively via `gh release create`.
+
 ## 0.1.7 — 2026-05-07 (maintenance)
 
 A maintenance release fixing two real bugs and bringing CI / packaging
