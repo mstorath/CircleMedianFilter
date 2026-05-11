@@ -1,6 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite both the software and the associated paper below."
 title: "Circle Median Filter: Fast median filtering for phase or orientation data"
+version: 0.1.7
+date-released: 2026-05-07
 abstract: "Reference implementation (C++ with MATLAB wrappers and Python bindings) of fast algorithms for arc-distance median filtering of signals and images whose values lie on the unit circle, e.g. phase data, interferometric SAR images, wind directions, or optical-flow orientations."
 type: software
 url: "https://github.com/mstorath/CircleMedianFilter"
