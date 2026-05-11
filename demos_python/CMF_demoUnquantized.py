@@ -42,9 +42,6 @@ def main():
     
     # Set filter size (R is used for both dimensions, so here T=R)
     R = 3
-    
-    # Convert the image to Fortran order (column-major) for compatibility with the C++ code
-    img2pi = np.asfortranarray(img2pi)
 
     # Apply the circle-median filter and measure execution time.
     start_time = time.time()
