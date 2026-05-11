@@ -35,9 +35,6 @@ def main():
     # Data is recorded every 10 minutes; one day has 24*6 = 144 samples.
     T = 24 * 6 + 1
     R = 1  # Since the data is 1D
-    
-    # Convert the data to Fortran order (column-major) for compatibility with the C++ code.
-    windDir2Pi = np.asfortranarray(windDir2Pi)
 
     # the data has to be in the second dimension for compatibility with the C++ code
     windDir2Pi_reshaped = windDir2Pi.reshape((1, windDir2Pi.size))
