@@ -33,7 +33,7 @@ where d denotes the arc distance length of two angles, and r, t are the horizont
 pip install pycirclemedianfilter
 ```
 
-**Important:** The underlying implementation expects *column-major order* arrays — convert with `data = np.asfortranarray(data)` if necessary before calling the filter function. See [`demos_python/`](demos_python/) for examples.
+Input arrays are accepted in either C-order or Fortran-order (since v0.1.7 the binding auto-converts as needed). Outputs are Fortran-strided. See [`demos_python/`](demos_python/) for examples.
 
 ### MATLAB
 
