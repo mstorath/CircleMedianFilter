@@ -7,13 +7,19 @@ documented here. This project follows
 
 ## [Unreleased]
 
+## 1.0.0 — 2026-05-11 (first stable release)
+
+Promoted from 0.1.7 to 1.0.0 as part of the lab-wide maintenance cycle.
+The C++ algorithms have been stable since 2017; the Python bindings have
+been published since 2025-02; the public API (`medfilt_circ2d`,
+`medfilt_circ2d_quant`) is unchanged. 1.0.0 signals API stability.
+
 ### Changed
 
-- **CI now auto-creates a GitHub Release on every `v*` tag push** in
-  addition to publishing to PyPI. The publish job extracts the matching
-  `## <version>` section from `CHANGELOG.md` as the release body and
-  attaches all wheels and the sdist as assets. v0.1.7's release entry
-  was created retroactively via `gh release create`.
+- Released as 1.0.0 (was 0.1.7).
+- README rewritten and harmonised with the lab-repo family (badge block, Quickstart-first ordering, "See also" section linking the five sibling repos, License footer).
+- **Stale column-major-order warning dropped** from the README and demo scripts. The binding was actually fixed in v0.1.7 to auto-convert non-Fortran-contiguous inputs, but the README still told users to call `np.asfortranarray()` themselves and the two demo scripts perpetuated the misconception. README, `demos_python/CMF_demoUnquantized.py`, and `demos_python/CMF_demoQuantized.py` now reflect the actual binding behaviour.
+- **CI now auto-creates a GitHub Release on every `v*` tag push** in addition to publishing to PyPI. The publish job extracts the matching `## <version>` section from `CHANGELOG.md` as the release body and attaches all wheels and the sdist as assets. v0.1.7's release entry was created retroactively via `gh release create`.
 
 ## 0.1.7 — 2026-05-07 (maintenance)
 

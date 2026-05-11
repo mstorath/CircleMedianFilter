@@ -8,7 +8,7 @@ name = "pycirclemedianfilter"
 # `pycirclemedianfilter` v0.1.6 on 2025-02-18 and renaming would require a
 # deprecation cycle. Sibling repos in the variational-methods family use
 # flat names (`pottslab`, `mumfordshah2d`, …); this is the family outlier.
-version = "0.1.7"
+version = "1.0.0"
 description = "Fast median filtering for circle-valued (phase / orientation) data — Python bindings for the C++ reference implementation"
 readme = "README.md"
 license = {file = "LICENSE"}
